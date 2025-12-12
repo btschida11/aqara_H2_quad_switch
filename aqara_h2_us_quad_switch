@@ -1,0 +1,228 @@
+blueprint:
+  name: ZHA - Aqara H2 US quadruple Rocker
+  description: 
+  domain: automation
+  input:
+    aqara_h2_rocker:
+      name: Aqara Wireless Mini Switch
+      description: Aqara Wireless Mini Switch to use
+      selector:
+        device:
+          integration: zha
+          manufacturer: LUMI
+          model: lumi.switch.agl006
+    top_single:
+      name: Top Single Press
+      description: Action to run on single press
+      default: []
+      selector:
+        action:
+    top_double:
+      name: Top Double Press
+      description: Action to run on double press
+      default: []
+      selector:
+        action:
+    top_long:
+      name: Top Long Press
+      description: Action to run when button is long pressed (held down)
+      default: []
+      selector:
+        action:
+    top_released:
+      name: Top Released
+      description: Action to run when button is released after a long press
+      default: []
+      selector:
+        action:
+    middle_single:
+      name: middle Single Press
+      description: Action to run on single press
+      default: []
+      selector:
+        action:
+    middle_double:
+      name: middle Double Press
+      description: Action to run on double press
+      default: []
+      selector:
+        action:
+    middle_long:
+      name: middle Long Press
+      description: Action to run when button is long pressed (held down)
+      default: []
+      selector:
+        action:
+    middle_released:
+      name: middle Released
+      description: Action to run when button is released after a long press
+      default: []
+      selector:
+        action:
+    bottom_single:
+      name: bottom Single Press
+      description: Action to run on single press
+      default: []
+      selector:
+        action:
+    bottom_double:
+      name: bottom Double Press
+      description: Action to run on double press
+      default: []
+      selector:
+        action:
+    bottom_long:
+      name: bottom Long Press
+      description: Action to run when button is long pressed (held down)
+      default: []
+      selector:
+        action:
+    bottom_released:
+      name: bottom Released
+      description: Action to run when button is released after a long press
+      default: []
+      selector:
+        action:
+    wireless_single:
+      name: wireless Single Press
+      description: Action to run on single press
+      default: []
+      selector:
+        action:
+    wireless_double:
+      name: wireless Double Press
+      description: Action to run on double press
+      default: []
+      selector:
+        action:
+    wireless_long:
+      name: wireless Long Press
+      description: Action to run when button is long pressed (held down)
+      default: []
+      selector:
+        action:
+    wireless_released:
+      name: wireless Released
+      description: Action to run when button is released after a long press
+      default: []
+      selector:
+        action:
+
+mode: restart
+max_exceeded: silent
+
+trigger:
+  - platform: device
+    domain: mqtt
+    device_id: !input device
+    type: action
+    subtype: hold_top
+  - platform: device
+    domain: mqtt
+    device_id: !input device
+    type: action
+    subtype: hold_center
+  - platform: device
+    domain: mqtt
+    device_id: !input device
+    type: action
+    subtype: hold_bottom
+  - platform: device
+    domain: mqtt
+    device_id: !input device
+    type: action
+    subtype: hold_wireless
+  - platform: device
+    domain: mqtt
+    device_id: !input device
+    type: action
+    subtype: single_top
+  - platform: device
+    domain: mqtt
+    device_id: !input device
+    type: action
+    subtype: single_center
+  - platform: device
+    domain: mqtt
+    device_id: !input device
+    type: action
+    subtype: single_bottom
+  - platform: device
+    domain: mqtt
+    device_id: !input device
+    type: action
+    subtype: single_wireless
+  - platform: device
+    domain: mqtt
+    device_id: !input device
+    type: action
+    subtype: double_top
+  - platform: device
+    domain: mqtt
+    device_id: !input device
+    type: action
+    subtype: double_center
+  - platform: device
+    domain: mqtt
+    device_id: !input device
+    type: action
+    subtype: double_bottom
+  - platform: device
+    domain: mqtt
+    device_id: !input device
+    type: action
+    subtype: double_wireless
+  - platform: device
+    domain: mqtt
+    device_id: !input device
+    type: action
+    subtype: release_top
+  - platform: device
+    domain: mqtt
+    device_id: !input device
+    type: action
+    subtype: release_center
+  - platform: device
+    domain: mqtt
+    device_id: !input device
+    type: action
+    subtype: release_bottom
+  - platform: device
+    domain: mqtt
+    device_id: !input device
+    type: action
+    subtype: release_wireless
+action:
+  - choose:
+      - conditions: "{{ trigger.payload == 'top_hold' }}"
+        sequence: !input hold_top
+      - conditions: "{{ trigger.payload == 'center_hold' }}"
+        sequence: !input hold_middle
+      - conditions: "{{ trigger.payload == 'bottom_hold' }}"
+        sequence: !input hold_bottom
+      - conditions: "{{ trigger.payload == 'wireless_hold' }}"
+        sequence: !input hold_wireless
+      - conditions: "{{ trigger.payload == 'top_single' }}"
+        sequence: !input single_top
+      - conditions: "{{ trigger.payload == 'center_single' }}"
+        sequence: !input single_center
+      - conditions: "{{ trigger.payload == 'bottom_single' }}"
+        sequence: !input single_bottom
+      - conditions: "{{ trigger.payload == 'wireless_single' }}"
+        sequence: !input single_wireless
+      - conditions: "{{ trigger.payload == 'top_double' }}"
+        sequence: !input double_top
+      - conditions: "{{ trigger.payload == 'center_double' }}"
+        sequence: !input double_center
+      - conditions: "{{ trigger.payload == 'bottom_double' }}"
+        sequence: !input double_bottom
+      - conditions: "{{ trigger.payload == 'wireless_double' }}"
+        sequence: !input double_wireless
+      - conditions: "{{ trigger.payload == 'top_release' }}"
+        sequence: !input release_top
+      - conditions: "{{ trigger.payload == 'center_release' }}"
+        sequence: !input release_center
+      - conditions: "{{ trigger.payload == 'bottom_release' }}"
+        sequence: !input release_bottom
+      - conditions: "{{ trigger.payload == 'wireless_release' }}"
+        sequence: !input release_wireless
