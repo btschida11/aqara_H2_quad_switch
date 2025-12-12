@@ -3,114 +3,110 @@ blueprint:
   description: 
   domain: automation
   input:
-    aqara_h2_rocker:
+    device: 
       name: Aqara Wireless Mini Switch
       description: Aqara Wireless Mini Switch to use
       selector:
         device:
-          integration: zha
-          manufacturer: LUMI
-          model: lumi.switch.agl006
+
     top_single:
       name: Top Single Press
       description: Action to run on single press
       default: []
       selector:
-        action:
+        action: {}
     top_double:
       name: Top Double Press
       description: Action to run on double press
       default: []
       selector:
-        action:
+        action: {}
     top_long:
       name: Top Long Press
       description: Action to run when button is long pressed (held down)
       default: []
       selector:
-        action:
+        action: {}
     top_released:
       name: Top Released
       description: Action to run when button is released after a long press
       default: []
       selector:
-        action:
+        action: {}
     middle_single:
       name: middle Single Press
       description: Action to run on single press
       default: []
       selector:
-        action:
+        action: {}
     middle_double:
       name: middle Double Press
       description: Action to run on double press
       default: []
       selector:
-        action:
+        action: {}
     middle_long:
       name: middle Long Press
       description: Action to run when button is long pressed (held down)
       default: []
       selector:
-        action:
+        action: {}
     middle_released:
       name: middle Released
       description: Action to run when button is released after a long press
       default: []
       selector:
-        action:
+        action: {}
     bottom_single:
       name: bottom Single Press
       description: Action to run on single press
       default: []
       selector:
-        action:
+        action: {}
     bottom_double:
       name: bottom Double Press
       description: Action to run on double press
       default: []
       selector:
-        action:
+        action: {}
     bottom_long:
       name: bottom Long Press
       description: Action to run when button is long pressed (held down)
       default: []
       selector:
-        action:
+        action: {}
     bottom_released:
       name: bottom Released
       description: Action to run when button is released after a long press
       default: []
       selector:
-        action:
+        action: {}
     wireless_single:
       name: wireless Single Press
       description: Action to run on single press
       default: []
       selector:
-        action:
+        action: {}
     wireless_double:
       name: wireless Double Press
       description: Action to run on double press
       default: []
       selector:
-        action:
+        action: {}
     wireless_long:
       name: wireless Long Press
       description: Action to run when button is long pressed (held down)
       default: []
       selector:
-        action:
+        action: {}
     wireless_released:
       name: wireless Released
       description: Action to run when button is released after a long press
       default: []
       selector:
-        action:
-
+        action: {}
 mode: restart
 max_exceeded: silent
-
 trigger:
   - platform: device
     domain: mqtt
@@ -192,7 +188,7 @@ trigger:
     device_id: !input device
     type: action
     subtype: release_wireless
-action:
+action: {}
   - choose:
       - conditions: "{{ trigger.payload == 'top_hold' }}"
         sequence: !input hold_top
