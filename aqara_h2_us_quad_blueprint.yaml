@@ -1,5 +1,5 @@
 blueprint:
-  name: ZHA - Aqara H2 US quadruple Rocker
+  name: Aqara H2 US quadruple Rocker
   description: 
   domain: automation
   input:
